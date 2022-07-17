@@ -26,6 +26,7 @@ export default {
         id: this.$store.state.tasks.length + 1,
         title: this.newTaskTitle,
         done: false,
+        dueDate: null,
       };
       this.$store.dispatch("addTask", newTaskCreated);
       this.newTaskTitle = "";

@@ -28,7 +28,7 @@
       color="primary"
       dark
       src="https://picsum.photos/1920/1080?random"
-      prominent
+      height="180"
     >
       <template v-slot:img="{ props }">
         <v-img
@@ -37,23 +37,21 @@
         ></v-img>
       </template>
 
-      <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
-
-      <v-app-bar-title>Vuetify Todo</v-app-bar-title>
-
-      <v-spacer></v-spacer>
-
-      <v-btn icon>
-        <v-icon>mdi-magnify</v-icon>
-      </v-btn>
-
-      <v-btn icon>
-        <v-icon>mdi-heart</v-icon>
-      </v-btn>
-
-      <v-btn icon>
-        <v-icon>mdi-dots-vertical</v-icon>
-      </v-btn>
+      <v-container class="pa-0 mt-3">
+        <v-row>
+          <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
+          <v-spacer></v-spacer>
+          <Search />
+        </v-row>
+        <v-row class="">
+          <v-app-bar-title class="ml-3 title text-h4"
+            >Vuetify Todo</v-app-bar-title
+          >
+        </v-row>
+        <v-row>
+          <LiveDateAndTime />
+        </v-row>
+      </v-container>
     </v-app-bar>
 
     <v-main>
@@ -65,6 +63,9 @@
 
 <script>
 import Snackbar from "@/components/Shared/Snackbar.vue";
+import Search from "./components/Tools/Search.vue";
+import LiveDateAndTime from "./components/Tools/LiveDateAndTime.vue";
+
 export default {
   data: () => ({
     drawer: null,
@@ -75,7 +76,14 @@ export default {
   }),
   component: {
     snackbar: require("@/components/Shared/Snackbar.vue").default,
+    search: require("@/components/Tools/Search.vue").default,
   },
-  components: { Snackbar },
+  components: { Snackbar, Search, LiveDateAndTime },
 };
 </script>
+
+<style scoped>
+.title {
+  width: 250px;
+}
+</style>

@@ -46,7 +46,7 @@ export default {
       if (this.isButtonDisable) return;
       const payload = {
         id: this.task.id,
-        editedTitle: this.editedTitle,
+        title: this.editedTitle,
       };
       this.$store.dispatch("editTask", payload);
       this.$emit("onCloseDialog", "edit");

@@ -7,19 +7,20 @@ const store = new Vuex.Store({
     state: {
         tasks: [
             {
-                id: 1, title: 'Wake Up', done: false,
+                id: 1, title: 'Wake Up', done: false, dueDate: '2022-07-17',
             },
             {
-                id: 2, title: 'Brush teeth', done: false,
+                id: 2, title: 'Brush teeth', done: false, dueDate: '2022-07-17',
             },
             {
-                id: 3, title: 'Eat Breakfast', done: false,
+                id: 3, title: 'Eat Breakfast', done: false, dueDate: '2022-07-17',
             },
         ],
         snackbar: {
             show: false,
             text: '',
-        }
+        },
+        search: '',
     },
     mutations: {
         addTask(state, newTask) {
@@ -42,7 +43,11 @@ const store = new Vuex.Store({
         },
         editTask(state, payload) {
             const taskIndex = state.tasks.findIndex((task) => task.id === payload.id);
-            state.tasks[taskIndex].title = payload.editedTitle
+            const taskKey = Object.keys(payload);
+            state.tasks[taskIndex][taskKey[1]] = payload[taskKey[1]]
+        },
+        setSearch(state, value) {
+            state.search = value;
         }
     },
     actions: {
@@ -72,7 +77,12 @@ const store = new Vuex.Store({
         }
     },
     getters: {
-
+        tasksFiltered(state) {
+            if (!state.search) {
+                return state.tasks
+            }
+            return state.tasks.filter((task) => task.title.toLocaleLowerCase().includes(state.search.toLocaleLowerCase()))
+        }
     },
 })
 

@@ -32,12 +32,19 @@
       v-if="dialogs.delete"
       @onCloseDialog="handleCloseDialog"
     />
+    <!-- Dialog DueDate -->
+    <DialogDueDate
+      :task="task"
+      v-if="dialogs.dueDate"
+      @onCloseDialog="handleCloseDialog"
+    />
   </div>
 </template>
 
 <script>
 import DialogDelete from "./Dialog/DialogDelete.vue";
 import DialogEdit from "./Dialog/DialogEdit.vue";
+import DialogDueDate from "./Dialog/DialogDueDate.vue";
 
 export default {
   emits: ["onOpenDeleteDialog"],
@@ -54,7 +61,9 @@ export default {
       {
         title: "Due Date",
         icon: "mdi-calendar",
-        click() {},
+        click() {
+          this.dialogs.dueDate = true;
+        },
       },
       {
         title: "Delete",
@@ -67,6 +76,7 @@ export default {
     dialogs: {
       delete: false,
       edit: false,
+      dueDate: false,
     },
   }),
   methods: {
@@ -80,6 +90,7 @@ export default {
   components: {
     DialogDelete,
     DialogEdit,
+    DialogDueDate,
   },
 };
 </script>
